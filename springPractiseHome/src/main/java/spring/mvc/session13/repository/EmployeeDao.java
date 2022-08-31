@@ -4,6 +4,7 @@ import java.util.List;
 
 import spring.mvc.session13.entity.Employee;
 
+
 public interface EmployeeDao {
 	    // 每頁筆數
 		int LIMIT = 5;
