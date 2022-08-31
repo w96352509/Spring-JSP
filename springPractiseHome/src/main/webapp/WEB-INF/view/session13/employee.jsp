@@ -30,7 +30,7 @@
     google.charts.setOnLoadCallback(drawChart);                // 固定
 function drawChart() { 
 	salary(1);
-	jobs();
+	jobs(1);
 }
 
 function salary(chartId) {
@@ -45,23 +45,23 @@ function salary(chartId) {
 				title: 'Salary'                                // 標題
 			};
 			
-			var chart = new google.visualization.BarChart(document.getElementById('piechart'));
+			var chart = new google.visualization.BarChart(document.getElementById('Salarychart'));
 			switch(chartId) {
         	case 2:
-        		chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        		chart = new google.visualization.PieChart(document.getElementById('Salarychart'));
         		break;
         	case 3:
-        		chart = new google.visualization.ColumnChart(document.getElementById('piechart'));
+        		chart = new google.visualization.ColumnChart(document.getElementById('Salarychart'));
         		break;
         	case 4:
-        		chart = new google.visualization.LineChart(document.getElementById('piechart'));
+        		chart = new google.visualization.LineChart(document.getElementById('Salarychart'));
         		break;	
         }
         
         chart.draw(data, options);
 }
 
-function jobs() {
+function jobs(chartId) {
 	    	var data = google.visualization.arrayToDataTable([   // 固定
 		        ['ename', 'job_count'],                          // key and Value
 		        <c:forEach var="emp" items="${ employees }">     // 拆解 employees 內容
@@ -81,8 +81,21 @@ function jobs() {
 			var options = {
 				title: 'Jobs'
 			};
+		    
+		   var chart = new google.visualization.BarChart(document.getElementById('line_chart')); // 調整圖形
+		   switch(chartId) {
+        	case 2:
+        		chart = new google.visualization.PieChart(document.getElementById('line_chart'));
+        		break;
+        	case 3:
+        		chart = new google.visualization.ColumnChart(document.getElementById('line_chart'));
+        		break;
+        	case 4:
+        		chart = new google.visualization.LineChart(document.getElementById('line_chart'));
+        		break;	
+        }
 		
-			var chart = new google.visualization.LineChart(document.getElementById('line_chart')); // 調整圖形
+			
 			chart.draw(data, options); // 固定	    	
 }
 	</script>
@@ -137,7 +150,7 @@ function jobs() {
 							<a href="#" onclick="salary(3)">column</a> |
 							<a href="#" onclick="salary(4)">line</a>
 						</legend>
-						<div id="piechart" style="width: 500px; height: 300px;"></div>
+						<div id="Salarychart" style="width: 500px; height: 300px;"></div>
 					</fieldset>
 				</form>
 			</td>
@@ -146,6 +159,10 @@ function jobs() {
 				<form class="pure-form">
 					<fieldset>
 						<legend>Jobs Line Chart</legend>
+						    <a href="#" onclick="jobs(1)">bar</a> |
+							<a href="#" onclick="jobs(2)">pie</a> |
+							<a href="#" onclick="jobs(3)">column</a> |
+							<a href="#" onclick="jobs(4)">line</a>
 						<div id="line_chart" style="width: 400px; height: 250px"></div>
 					</fieldset>
 				</form>
